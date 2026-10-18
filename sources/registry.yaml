@@ -1,0 +1,149 @@
+# Reviewed 2026-10-09. Configured does not mean fetched successfully.
+# No amounts or eligibility claims are seeded; facts come from scan evidence.
+sources:
+  - id: cloudflare-workers
+    name: Cloudflare Workers pricing
+    adapter: html
+    url: https://developers.cloudflare.com/workers/platform/pricing/
+    provider: Cloudflare
+    category: Cloud
+    official_domains: [cloudflare.com]
+    notes: Official pricing documentation; strict robots compliance.
+  - id: groq-billing
+    name: Groq billing and free plan
+    adapter: html
+    url: https://console.groq.com/docs/billing-faqs
+    provider: Groq
+    category: AI
+    official_domains: [groq.com]
+  - id: aws-activate
+    name: AWS startup credits
+    adapter: html
+    url: https://aws.amazon.com/startups/credits
+    provider: AWS
+    category: Cloud
+    official_domains: [aws.amazon.com, startups.aws.com]
+  - id: google-cloud
+    name: Google Cloud free program
+    adapter: html
+    url: https://docs.cloud.google.com/free/docs/free-cloud-features
+    provider: Google Cloud
+    category: Cloud
+    official_domains: [cloud.google.com]
+    notes: Replaced oversized marketing page with official program documentation; same provider, no size-limit bypass.
+  - id: microsoft-startups
+    name: Microsoft for Startups
+    adapter: html
+    url: https://www.microsoft.com/en-us/startups
+    provider: Microsoft
+    category: Cloud
+    official_domains: [microsoft.com]
+  - id: github-students
+    name: GitHub Student Developer Pack
+    adapter: html
+    url: https://education.github.com/pack
+    provider: GitHub
+    category: Learning
+    official_domains: [github.com]
+  - id: supabase-pricing
+    name: Supabase plans
+    adapter: html
+    url: https://supabase.com/pricing
+    provider: Supabase
+    category: Cloud
+    official_domains: [supabase.com]
+  - id: neon-pricing
+    name: Neon plans
+    adapter: html
+    url: https://neon.com/pricing
+    provider: Neon
+    category: Cloud
+    official_domains: [neon.com]
+  - id: vercel-hobby
+    name: Vercel Hobby plan
+    adapter: html
+    url: https://vercel.com/docs/plans/hobby
+    provider: Vercel
+    category: Developer
+    official_domains: [vercel.com]
+  - id: huggingface-blog
+    name: Hugging Face announcements
+    adapter: feed
+    url: https://huggingface.co/blog/feed.xml
+    provider: Hugging Face
+    category: AI
+    family: official news
+    official_domains: [huggingface.co]
+  - id: cloudflare-blog
+    name: Cloudflare announcements
+    adapter: feed
+    url: https://blog.cloudflare.com/rss/
+    provider: Cloudflare
+    category: News
+    family: official news
+    official_domains: [cloudflare.com]
+  - id: github-blog
+    name: GitHub developer news
+    adapter: feed
+    url: https://github.blog/feed/
+    provider: GitHub
+    category: Developer
+    family: official news
+    official_domains: [github.blog, github.com]
+  - id: ollama-releases
+    name: Ollama releases
+    adapter: github
+    url: https://api.github.com/repos/ollama/ollama/releases?per_page=5
+    provider: Ollama
+    category: Developer
+    family: releases
+    official_domains: [github.com]
+    cadence_minutes: 360
+    notes: Public GitHub REST; unauthenticated shared IP quota, typically 60/hour. Publisher trust is scoped to this configured repository.
+  - id: transformers-releases
+    name: Transformers releases
+    adapter: github
+    url: https://api.github.com/repos/huggingface/transformers/releases?per_page=5
+    provider: Hugging Face
+    category: AI
+    family: releases
+    official_domains: [github.com]
+    cadence_minutes: 360
+  - id: mlh-events
+    name: Major League Hacking events
+    adapter: html
+    url: https://www.mlh.com/seasons/2027/events
+    provider: Major League Hacking
+    category: Opportunities
+    official_domains: [mlh.io, mlh.com]
+    strategy: event_index
+    notes: Current season linked from the prior official season page. Structured event cards produce individual leads; external organizers require domain review.
+  - id: devpost
+    name: Devpost hackathons
+    adapter: html
+    url: https://devpost.com/hackathons
+    provider: Devpost
+    category: Opportunities
+    official_domains: [devpost.com]
+    enabled: false
+    notes: Disabled pending access-policy and event-level eligibility review. No anti-bot bypass.
+  - id: hn-community
+    name: Hacker News community leads
+    adapter: community
+    url: https://news.ycombinator.com/rss
+    provider: Community contributors
+    category: News
+    family: community
+    official_domains: []
+    enabled: false
+    notes: Optional public RSS. Leads are unverified; domains require explicit review.
+  - id: hn-search
+    name: Public Hacker News search leads
+    adapter: search
+    url: https://hn.algolia.com/api/v1/search_by_date?query=free%20credits&tags=story&hitsPerPage=5
+    provider: Community contributors
+    category: News
+    family: search
+    official_domains: []
+    enabled: false
+    notes: Optional public Algolia HN search. Project repository archived in February 2026; no uptime guarantee. Leads never establish official claims.

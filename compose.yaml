@@ -1,0 +1,18 @@
+services:
+  searxng:
+    image: searxng/searxng@sha256:c8aea45a12a1ccde4466f9d066367c18d60a777a7580d686a2941c6bdfeb221f
+    ports:
+      - "127.0.0.1:8088:8080"
+    volumes:
+      - ./config/searxng.yml:/etc/searxng/settings.yml:ro
+      - ./data/host-ca:/usr/local/share/ca-certificates/host:ro
+    environment:
+      SEARXNG_SECRET: ${SEARXNG_SECRET:?Set SEARXNG_SECRET in your shell before starting}
+    restart: "no"
+    mem_limit: 768m
+    cpus: 1.5
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"

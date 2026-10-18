@@ -1,0 +1,13 @@
+[Unit]
+Description=Local Global Opportunity Radar
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/path/to/crawleee
+ExecStart=%h/path/to/crawleee/.venv/bin/python -m backend serve
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
